@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: qa-user-service
+  namespace: argocd
+spec:
+  project: med-erp-qa
+  source:
+    repoURL: https://github.com/gavademahesh98/my-Med-ERP.git
+    targetRevision: qa
+    path: helm/user-service
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: qa
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=false
